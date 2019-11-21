@@ -249,7 +249,7 @@ var dialogNode = module.exports = {
     this.run(cmd, cb, callback);
   },
 
-  entry: function( str, title, timeout, callback){
+  entry: function( str, title, timeout, hidden, callback){
     this.init();
     if( OS === "linux")
     {
@@ -274,6 +274,9 @@ var dialogNode = module.exports = {
 
       var script = 'set theResponse to display dialog "' + str + '"';
       script += ' default answer "" ';
+      if(hidden) {
+        script += ' hidden answer true ';
+      }
       script += ' with icon note with title \"' + title + '\"';
       script += ' buttons {"Cancel", "Continue"}';
       script += ' default button "Continue"'
@@ -341,7 +344,7 @@ var dialogNode = module.exports = {
     }
     else if (OS === "win32")
     {
-      this.entry( str, title, timeout, callback);
+      this.entry( str, title, timeout, false, callback);
       return
     }
 
