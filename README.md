@@ -112,12 +112,13 @@ Returns the result of the user action as a string handed into the callback funct
 Dialog querying user to type in some text.
 
 ```
-dialog-node.entry(msg, title, timeout, callback);
+dialog-node.entry(msg, title, timeout, hidden, callback);
 ```
 
 Returns the text the user typed as a string handed into the callback function (see also callback mechanism):
 * Text that user typed in the entry mask before pressing the 'OK' button
 * Empty string when user did not type anything or the system closed the dialog through other actions
+* hidden=True masks the input characters (i.e. for password)
 
 ### calendar
 
