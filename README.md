@@ -138,12 +138,13 @@ Returns the date the user selected as a string handed into the callback function
 Prompts user to select a file. 
 
 ```
-dialog-node.fileselect(msg, title, timeout, callback);
+dialog-node.fileselect(msg, title, timeout, folder, callback);
 ```
 
 Returns the path of a selected file as a string handed into the callback function (see also callback mechanism):
 * Path of file that user selected in the file picker before pressing the 'OK' button. Currently the path format is different for different OSes. This will be harmonized across all OSes at a later time.
 * Empty string when user did not select a date or the system closed the dialog through other actions
+* set folder=True to select a folder instead of a file
 
 ## Callback mechanism
 
