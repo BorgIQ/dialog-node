@@ -351,7 +351,7 @@ var dialogNode = module.exports = {
     this.run(cmd, cb, callback);
   },
 
-  fileselect: function( str, title, timeout, callback){
+  fileselect: function( str, title, timeout, folder, callback){
     this.init();
     if( OS === "linux")
     {
@@ -373,14 +373,16 @@ var dialogNode = module.exports = {
     {
       str = str.replace(/"/g, "'"); // double quotes to single quotes
       cmd.push('osascript') && cmd.push('-e');
+      var selector = 'file';
+      if (folder) {
+        selector = 'folder'
+      }
 
-      var script = 'set theDocument to choose file with prompt "' + str + '"';
+      var script = 'set theDocument to POSIX path of (choose ' + selector + ' with prompt "' + str + '")';
       cmd.push(script);
 
       cb = function(code, stdout, stderr){
-        //parse return from appl script code
-        var findstr = "text returned:";
-        retVal = stdout.slice(stdout.indexOf("text returned:") + findstr.length, -1);
+        retVal = stdout.trim();
 
         if(callback)
           callback(code, retVal, stderr);
